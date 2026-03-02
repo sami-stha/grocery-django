@@ -16,6 +16,16 @@
   </head>
   <body>
     <section class="section-center">
+       <!-- Messages -->
+          <pre>
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+          </pre>
+
+       
          <form method="POST"
             action="{% if edit_item %}{% url 'grocery:update' edit_item.id %}{% else %}{% url 'grocery:add' %}{% endif %}">
           {% csrf_token %}
@@ -37,6 +47,7 @@
             </button>
           </div>
         </form>
+
       <!-- Items List -->
       <div class="items">
         {% for item in items %}
@@ -66,10 +77,6 @@
                     <i class="fa-regular fa-trash-can"></i>
                 </button>
             </form>
-
-      
-     
-    
         </div>
         {% empty %}
         <p style="text-align: center; color: #888;">
